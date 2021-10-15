@@ -5,36 +5,22 @@
 }
 
 .clear::after {
-    content: ""; 
-    display: block; 
-    height: 0; 
-    clear: both; 
-    visibility: hidden;  
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 .input_file {
-    margin: 0 auto;
-    margin-top: 20px;
-    width: 200px;
-    
+
 }
 
-.input_file #files {    
+.input_file #files {
     width: 0px;
     height: 0px;
 
 }
-
-.input_file .choose_file {
-    width: 200px;
-    height: 100px;
-    line-height: 100px;
-    font-size: 20px;
-    border: none;
-    background-color: cornflowerblue;
-    color:white;
-}
-
 
 .input_file .file_list {
     margin-top: 20px;
@@ -43,7 +29,6 @@
 .origin_text_warp {
     margin: 0 auto;
     width: 600px;
-    margin-top: 20px;
 }
 
 .origin_text_warp .origin_text {
@@ -114,5 +99,11 @@
     font-size: 20px;
     border: none;
     background-color: cornflowerblue;
-    color:white;
+    color: white;
+}
+
+/*------------- 新增样式 ---------------*/
+.btn-container {
+    margin-bottom: 10px;
+    text-align: center;
 }
