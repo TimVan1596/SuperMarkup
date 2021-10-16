@@ -1,8 +1,3 @@
-* {
-    padding: 0;
-    content: "";
-    margin: 0;
-}
 
 .clear::after {
     content: "";
@@ -12,23 +7,11 @@
     visibility: hidden;
 }
 
-.input_file {
-
-}
 
 .input_file #files {
     width: 0px;
     height: 0px;
 
-}
-
-.input_file .file_list {
-    margin-top: 20px;
-}
-
-.origin_text_warp {
-    margin: 0 auto;
-    width: 600px;
 }
 
 .origin_text_warp .origin_text {
@@ -46,11 +29,6 @@
     justify-content: center;
 }
 
-.fix_text_warp .fix_text {
-    display: inline-block;
-    border: 2px solid cornflowerblue;
-    font-size: 20px;
-}
 
 .fix_text_warp .options {
     list-style: none;
@@ -76,13 +54,6 @@
 
 }
 
-.content_warp .show_wrap .show_fixed {
-    border: 2px solid cornflowerblue;
-    width: 400px;
-    height: 200px;
-    font-size: 15px;
-}
-
 
 .next_warp {
     margin-top: 20px;
@@ -103,7 +74,105 @@
 }
 
 /*------------- 新增样式 ---------------*/
+/* 导入区-按钮组的样式 */
 .btn-container {
     margin-bottom: 10px;
-    text-align: center;
+    text-align: right;
 }
+
+/* 卡片的样式 */
+.text-card {
+    border-color: #eee;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #666;
+    box-shadow: 1px 1px 4px #c0c4cc;
+    width: 70%;
+    margin-left: 15%;
+}
+
+/* 卡片中文本的样式*/
+.text-card .layui-card-body {
+    text-indent: 1em;
+    font-size: x-large;
+    line-height: normal;
+    color: #6b6b6b;
+}
+
+.btn-container .layui-btn {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.fix_text {
+    display: inline-block;
+    border: 2px solid #2196f3;
+    font-size: 1.2em;
+    width: -webkit-fill-available;
+    height: 270px;
+}
+
+.show_fixed {
+    display: inline-block;
+    border: 2px solid #2196f3;
+    font-size: 1.2em;
+    width: -webkit-fill-available;
+    height: 270px;
+}
+
+/* 操作按钮 */
+.options-btn {
+    margin-bottom: 8%;
+}
+
+/* 操作区 */
+.operate-zero {
+    margin-top: 2%;
+}
+
+/*** 自适应部分 ***/
+/* 移动设备 */
+@media screen and (min-width: 160px) and (max-width: 640px) {
+
+    .text-card .layui-card-body {
+        text-indent: 1em;
+        font-size: large;
+        line-height: normal;
+        color: #6b6b6b;
+    }
+
+    .options-btn {
+        margin-bottom: 35%;
+        width: 85%;
+        text-align: center;
+        padding: 0;
+    }
+
+    .text-card {
+        width: 94%;
+        margin-left: 3%;
+    }
+
+    .operate-zero {
+        margin-top: 8%;
+    }
+
+    .fix_text {
+        font-size: 1.0em;
+    }
+
+    .show_fixed {
+        font-size: 1.0em;
+    }
+}
+
+@media screen and (min-width: 641px) {
+    .options-btn {
+        width: 65%;
+        font-size: larger;
+    }
+}
+
+/* 头部 */

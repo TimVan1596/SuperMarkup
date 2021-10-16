@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
     <title>关系标注工具</title>
@@ -7,101 +7,126 @@
     <link rel="stylesheet" href="js/layui/css/layui.css">
     <link rel="stylesheet" href="css/style_index.css">
     <link rel="stylesheet" href="css/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="js/jquery.js"></script>
     <script src="js/fileSaver.js"></script>
     <!-- 引入 layui.js -->
     <script src="js/layui/layui.js"></script>
     <script src="js/label.js"></script>
+    <style>
+        .btn-container .layui-btn {
+            margin-bottom: 0;
+        }
+
+    </style>
 </head>
 <body>
 
-<ul class="layui-nav layui-bg-cyan">
-    <li class="layui-nav-item">
-        <i class="layui-icon">&#xe600;
-        </i>
-        关系标注工具
-    </li>
-    <li class="layui-nav-item layui-this"><a href="index.html">主页</a></li>
-</ul>
-
-<div class="layui-container">
-
-    <div class="layui-row">
-        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-            <div class="input_file">
-                <input type="file" name="files" id="files" value="" style="opacity: 0;">
-                <div class="layui-btn-container btn-container">
-                    <button class="choose_file layui-btn layui-btn-lg layui-btn-radius layui-btn-normal"><i
-                            class="layui-icon layui-icon-upload-drag"></i>
-                        来吧选文件吧
-                    </button>
-                    <button class=" layui-btn layui-btn-lg layui-btn-radius layui-btn-primary"
-                            id="uploadFromTextBtn"
-                    >文本导入
-                    </button>
-                </div>
-
-
-                <ul id="file_list"></ul>
-            </div>
-
-            <div class="content_warp">
-                <div class="origin_text_warp">
-            <textarea readonly class="origin_text" name="" id="" cols="30" rows="10">
-
-        </textarea>
-
-                </div>
-
-
-                <div class="fix_text_warp">
-            <textarea class="fix_text" name="" id="" cols="30" rows="10">
-
-        </textarea>
-                    <ul class="options">
-                        <li>
-                            <button name="实例" class="option">实例</button>
-                        </li>
-                        <li>
-                            <button name="操作员" class="option">操作员</button>
-                        </li>
-                        <li>
-                            <button name="发生国" class="option">发生国</button>
-                        </li>
-                        <li>
-                            <button name="战争" class="option">战争</button>
-                        </li>
-                        <li>
-                            <button name="武器" class="option">武器</button>
-                        </li>
-                        <li>
-                            <button name="设计者" class="option">设计者</button>
-                        </li>
-                    </ul>
-
-
-                    <div class="show_wrap">
-                <textarea class="show_fixed" name="" id="" cols="30" rows="10">
-
-            </textarea>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="next_warp">
-                <button class="next_btn">下一句</button>
-            </div>
-
-        </div>
-
-    </div>
+<div class="layui-header header header-doc" autumn="">
+    <ul class="layui-nav layui-bg-cyan">
+        <li class="layui-nav-item">
+            <i class="layui-icon">&#xe600;
+            </i>
+            关系标注工具
+        </li>
+        <li class="layui-nav-item layui-this"><a href="index.html">主页</a></li>
+    </ul>
 </div>
 
 
+<div class="layui-container">
+    <div class="layui-row">
+        <!------------- start 导入区 --------------->
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+            <div class="input_file">
+                <input type="file" name="files" id="files" value="" style="opacity: 0;">
+
+                <ul id="file_list"></ul>
+            </div>
+            <div>
+                <div class="layui-card text-card">
+                    <div class="layui-card-header" style="">
+                        <div id="card-title" style="float: left">
+                        </div>
+                        <div class="layui-btn-container btn-container" style="float: right">
+                            <button class="choose_file layui-btn layui-btn-sm layui-btn-radius layui-btn-normal"><i
+                                    class="layui-icon layui-icon-upload-drag"></i>
+                                来吧选文件吧
+                            </button>
+                            <button class=" layui-btn layui-btn-sm layui-btn-radius layui-btn-primary"
+                                    id="uploadFromTextBtn"
+                            >文本导入
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="layui-card-body">
+                        <div id="origin-text"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!------------- end 导入区 --------------->
+
+
+        <!------------- start 操作区 --------------->
+        <div class="operate-zero layui-col-xs12 layui-col-sm12 layui-col-md12">
+            <div class="layui-col-xs5 layui-col-sm5 layui-col-md5">
+                <textarea class="fix_text layui-textarea" name="">
+
+            </textarea>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <ul style="text-align: center">
+                    <li>
+                        <button name="实例" class="options-btn layui-btn layui-btn-normal">实例</button>
+                    </li>
+                    <li>
+                        <button name="操作员" class="options-btn layui-btn layui-btn-normal">操作员</button>
+                    </li>
+                    <li>
+                        <button name="发生国" class="options-btn layui-btn layui-btn-normal">发生国</button>
+                    </li>
+                    <li>
+                        <button name="战争" class="options-btn layui-btn layui-btn-normal">战争</button>
+                    </li>
+                    <li>
+                        <button name="武器" class="options-btn layui-btn layui-btn-normal">武器</button>
+                    </li>
+                    <li>
+                        <button name="设计者" class="options-btn layui-btn layui-btn-normal">设计者</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-col-xs5 layui-col-sm5 layui-col-md5">
+                <div class="show_wrap">
+                    <textarea class="show_fixed layui-textarea" id="show-fixed-ta" name="" cols="30" rows="10">
+
+                </textarea>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                <div class="next_warp" style="text-align: center">
+                    <button style="width: 50%;height: 54px;line-height: 46px;font-size:large;"
+                            id="next-btn"
+                            class="layui-btn layui-btn-lg layui-btn-normal">下一句
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!------------- end 操作区 --------------->
+
+</div>
+</div>
+
 <div class="layui-footer footer footer-index">
     <div class="layui-main">
-        <p>© 2021 <a href="http://120.79.210.170:88//">CUGB出品</a> WTFPL license</p>
+        <p>© 2021 <a href="http://120.79.210.170:88//">[ CUGB/1012 出品 ]</a> WTFPL License</p>
         <p>
             <a href="https://github.com/TimVan1596" target="_blank" rel="nofollow">GitHub</a>
             <a href="https://gitee.com/TimVanX" target="_blank" rel="nofollow">码云</a>
