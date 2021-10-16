@@ -4,8 +4,32 @@
     text-align: center;
     color: #666;
     font-weight: 300;
+    bottom: 0;
 }
 
 .footer a {
     padding: 0 5px;
 }
+
+.layui-nav-right {
+    position: absolute;
+    right: 5%;
+    top: 0;
+    padding: 0;
+    background: none;
+    color: white;
+}
+
+
+/*** 自适应部分 ***/
+/* 移动设备 */
+@media screen and (min-width: 160px) and (max-width: 640px) {
+    .footer {
+        display: none;
+    }
+
+    .layui-nav-right {
+        right: 15%;
+    }
+}
+

@@ -14,14 +14,34 @@ var origin_array = [];
 var fix_array = [];
 var utilTool = new Util();
 
-var keywords = ['是一款', '开发', '设计', '研制', '订购', '国空军', '国海军', '国陆军'
+var keywords = ['是一款', '开发', '设计', '使用国家', '使用国', '研制', '订购', '国空军', '国海军'
+    , '国陆军', '生产国家', '生产国', '拥有国家', '拥有国', '开发公司', '研发公司', '产地', '制造国'
     , '采购', '第二次世界大战', '二战', '搭载', '战场上', '战争中', '参与过', '可以发射', '设计'
-    , '是一款', '是一个', '一战', '第一次世界大战', '改进', '装备']
+    , '是一款', '是一个', '一战', '第一次世界大战', '改进', '装备', '是一', '使用', '产地']
 
+
+layui.config({
+    base: 'js/'
+}).extend({
+    ClipboardJS: 'clipboard.min'
+});
 
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function () {
+layui.use(['element', 'layer', 'ClipboardJS'], function () {
     var element = layui.element;
+    var ClipboardJS = layui.ClipboardJS;
+
+    var clipboard = new ClipboardJS("#copy-btn");
+    clipboard.on("success", function (e) {
+        layer.msg('已将结果复制到剪切板');
+        e.clearSelection();
+    });
+
+    //
+    // clipboard.on('error', function (e) {
+    //     document.querySelector('.copy');
+    //     alert("复制失败,请记住下必须付款的金额 不能多不能少否则不能成功");
+    // });
 
     // 初始化
     $(".fix_text").val('');
@@ -32,9 +52,9 @@ layui.use('element', function () {
         // 审核备注
         layer.prompt({
             formType: 2,
-            maxlength: 10240,
+            maxlength: 32768,
             title: '直接复制文本到这里',
-            area: ['500px', '150px'],
+            area: ['480px', '192px'],
         }, function (value, index, elem) {
 
             analysis(value)
@@ -184,4 +204,19 @@ layui.use('element', function () {
         return text;
     }
 
+    //打开提示文件
+    $('#header-help').click(function () {
+        layer.open({
+            type: 2,
+            title: '军事装备数据标识要点',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['90%', '65%'],
+            content: 'help.html'
+        });
+    })
+
+    //复制到剪切板
+
 });
+

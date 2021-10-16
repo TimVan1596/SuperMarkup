@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>关系标注工具</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <!-- 引入 layui.css -->
     <link rel="stylesheet" href="js/layui/css/layui.css">
     <link rel="stylesheet" href="css/style_index.css">
     <link rel="stylesheet" href="css/global.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="js/jquery.js"></script>
     <script src="js/fileSaver.js"></script>
     <!-- 引入 layui.js -->
     <script src="js/layui/layui.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/1.5.12/clipboard.min.js"></script>
     <script src="js/label.js"></script>
     <style>
         .btn-container .layui-btn {
@@ -24,13 +26,26 @@
 
 <div class="layui-header header header-doc" autumn="">
     <ul class="layui-nav layui-bg-cyan">
-        <li class="layui-nav-item">
+        <li class="layui-nav-item" lay-unselect>
             <i class="layui-icon">&#xe600;
             </i>
             关系标注工具
         </li>
         <li class="layui-nav-item layui-this"><a href="index.html">主页</a></li>
+        <li class="layui-nav-item header-btn" id="header-help" lay-unselect>提示</li>
     </ul>
+
+    <ul class="layui-nav layui-nav-right" lay-bar="disable">
+        <li class="layui-nav-item">
+            <a href="javascript:;" id="copy-btn" data-clipboard-target="#show-fixed-ta">
+                <i class="layui-icon layui-icon-form"></i>
+
+                复制结果</a>
+        </li>
+
+    </ul>
+
+
 </div>
 
 
@@ -74,9 +89,9 @@
         <!------------- start 操作区 --------------->
         <div class="operate-zero layui-col-xs12 layui-col-sm12 layui-col-md12">
             <div class="layui-col-xs5 layui-col-sm5 layui-col-md5">
-                <textarea class="fix_text layui-textarea" name="">
+                    <textarea class="fix_text layui-textarea" name="">
 
-            </textarea>
+                </textarea>
             </div>
             <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
                 <ul style="text-align: center">
@@ -102,9 +117,9 @@
             </div>
             <div class="layui-col-xs5 layui-col-sm5 layui-col-md5">
                 <div class="show_wrap">
-                    <textarea class="show_fixed layui-textarea" id="show-fixed-ta" name="" cols="30" rows="10">
+                        <textarea class="show_fixed layui-textarea" id="show-fixed-ta" name="" cols="30" rows="10">
 
-                </textarea>
+                    </textarea>
                 </div>
             </div>
 
@@ -117,23 +132,26 @@
                 </div>
             </div>
         </div>
-
-    </div>
-    <!------------- end 操作区 --------------->
-
-</div>
-</div>
-
-<div class="layui-footer footer footer-index">
-    <div class="layui-main">
-        <p>© 2021 <a href="http://120.79.210.170:88//">[ CUGB/1012 出品 ]</a> WTFPL License</p>
-        <p>
-            <a href="https://github.com/TimVan1596" target="_blank" rel="nofollow">GitHub</a>
-            <a href="https://gitee.com/TimVanX" target="_blank" rel="nofollow">码云</a>
-            <!--            <a href="javascript:;" site-event="weixinmp">公众号</a>-->
-            <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow">皖ICP备18002720号</a>
-        </p>
+        <!------------- end 操作区 --------------->
     </div>
 </div>
+
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+            <footer class="footer">
+                <p>© 2021 <a href="http://120.79.210.170:88//">[ CUGB/1012 出品 ]</a> WTFPL License version 2.1</p>
+                <p>
+                    <a href="https://github.com/TimVan1596" target="_blank" rel="nofollow">GitHub</a>
+                    <a href="https://gitee.com/TimVanX" target="_blank" rel="nofollow">码云</a>
+                    <!--            <a href="javascript:;" site-event="weixinmp">公众号</a>-->
+                    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow">皖ICP备18002720号</a>
+                </p>
+            </footer>
+        </div>
+
+    </div>
+</div>
+
 </body>
 </html>

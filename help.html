@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>关系标注工具</title>
+    <!-- 引入 layui.css -->
+    <link rel="stylesheet" href="js/layui/css/layui.css">
+    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="css/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="js/jquery.js"></script>
+    <!-- 引入 layui.js -->
+    <script src="js/layui/layui.js"></script>
+    <style>
+        .text-red {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-container">
+    <div class="layui-row">
+        <!------------- start 文字区 --------------->
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">十大关系</h2>
+                    <div class="layui-colla-content layui-show">1.实例（xxx战斗机，是一款xxx战斗机）<br/>
+                        3.操作员（通常为部队，例如x国空军/海军/驻xx部队）<br/>
+                        5.发生国（指哪些国家在使用该装备，如x国采购xx架，订购xx）<br/>
+                        6.战争（在xx战场上，xx战争中，参与过xx冲突）<br/>
+                        7.武器（搭载有xx;xx;xx，可以发射xx;xx;xx，）<br/>
+                        9.设计者（由x国xx公司研制）<br/>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">拆分</h2>
+                    <div class="layui-colla-content">例：
+                        FC-1战斗机是20世纪90年代末期中国和巴基斯坦共同投资、中国航空工业集团公司所属成都飞机工业（集团）有限责任公司、成都飞机设计研究所、中国航空技术进出口公司等单位联合研制，巴基斯坦空军参与开发的一型单发、单座、全天候多用途战斗机 。<br/>
+                        拆分为：
+                        1 FC-1战斗机是一型单发、单座、全天候多用途<span class="text-red">战斗机</span> 。<br/>
+                        0 FC-1战斗机是20世纪90年代末期的。<br/>
+                        0 FC-1战斗机是中国和巴基斯坦共同投资的。<br/>
+                        9 FC-1战斗机是巴基斯坦空军参与开发的<br/>
+                        9 FC-1战斗机是中国航空工业集团公司所属成都飞机工业（集团）有限责任公司、成都飞机设计研究所、中国航空技术进出口公司等单位联合研制的。<br/></div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">多个关系</h2>
+                    <div class="layui-colla-content">如果一句话中有多个关系
+                        例如：<br/>
+                        F-15战斗机是美国空军一型超音速喷气式第四代战斗机 。<br/>
+                        将句子复制黏贴，多个关系都标上：<br/>
+                        1 F-15战斗机是美国空军一型超音速喷气式第四代战斗机 。<br/>
+                        3 F-15战斗机是美国空军一型超音速喷气式第四代战斗机 。<br/>
+
+                        1 P-39战斗机是美国一型单座单发平直翼活塞式战斗机。<br/>
+                        5 P-39战斗机是美国一型单座单发平直翼活塞式战斗机。<br/></div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">举例</h2>
+                    <div class="layui-colla-content">发生国举例：<br/>
+                        5 沙特原准备在48架F-15S双座型基础上<span class="text-red">订购</span>24架F-15F，后全部改为F-15S。<br/>
+                        5 F-15K韩国<span class="text-red">订购</span>的F-15E出口型。<br/>
+                        5 因此，大多数“眼镜蛇王”被租借给他国使用，前苏联空军<span class="text-red">购买</span>了2400架。<br/>
+                        <br/>
+                        战争举例：<br/>
+                        6 “空中飞蛇”还是<span class="text-red">二战</span>中最早使用前三点起落架的战斗机之一。<br/>
+                        6 P-39随美国陆军航空兵的作战单位在<span class="text-red">北非、地中海和太平洋战场</span>发挥了战斗作用。<br/>
+                        <br/>
+                        其他
+                        例如空天母舰、F-19战斗机（编号未使用）等不存在的实体全部标注为0<br/></div>
+                </div>
+            </div>
+        </div>
+        <!------------- end 文字区 --------------->
+
+    </div>
+</div>
+</body>
+</html>

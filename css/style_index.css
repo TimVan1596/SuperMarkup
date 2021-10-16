@@ -56,8 +56,7 @@
 
 
 .next_warp {
-    margin-top: 20px;
-    width: 100%;
+    margin-top:1%;
 
 }
 
@@ -111,7 +110,7 @@
     border: 2px solid #2196f3;
     font-size: 1.2em;
     width: -webkit-fill-available;
-    height: 270px;
+    height: 300px;
 }
 
 .show_fixed {
@@ -119,7 +118,7 @@
     border: 2px solid #2196f3;
     font-size: 1.2em;
     width: -webkit-fill-available;
-    height: 270px;
+    height: 300px;
 }
 
 /* 操作按钮 */
@@ -131,6 +130,17 @@
 .operate-zero {
     margin-top: 2%;
 }
+
+/**/
+
+.header-btn {
+    display: block;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 /*** 自适应部分 ***/
 /* 移动设备 */
