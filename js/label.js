@@ -65,7 +65,7 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
             title: '直接复制文本到这里',
             area: ['480px', '192px'],
         }, function (value, index, elem) {
-
+            fileName = 'temp.txt'
             analysis(value)
             layer.close(index);
             return value;
