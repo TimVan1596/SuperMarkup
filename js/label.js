@@ -11,12 +11,13 @@ class Util {
 
 /** 全局变量
  *  origin_array = 从源文件按照句号分割的全部段落
- *  fixArray
+ *  originLength = 句段总个数
  * */
 var origin_array = [];
 var fixArray = [];
 var utilTool = new Util();
-var fileName = ""
+var fileName = "";
+var originLength;
 
 var keywords = ['是一款', '开发', '设计', '使用国家', '使用国', '研制', '订购', '国空军', '国海军'
     , '国陆军', '生产国家', '生产国', '拥有国家', '拥有国', '开发公司', '研发公司', '产地', '制造国'
@@ -143,9 +144,8 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         // 删除原数组第一个元素
         origin_array.shift();
 
-        console.log(origin_array)
-
-
+        //改变进度条
+        changeProgress(originLength - origin_array.length, originLength)
         // 判断是否还有
         if (origin_array.length > 0) {
             var firstText = origin_array[0];
@@ -166,7 +166,6 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
                 location.reload();
             }, function () {
             });
-
         }
         $(".fix_text").val("");
 
@@ -182,7 +181,8 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
             origin_array[i] = utilTool.clearString(origin_array[i]);
         }
         cleanEmpty(origin_array)
-
+        originLength = origin_array.length
+        changeProgress(0, originLength)
 
         var firstText = origin_array[0];
         // firstText = '<span style="color: #0000FF">' + firstText + '</span>';
@@ -231,13 +231,6 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         $(".fix_text").val(originVal + fix_sentence + '\n');
     }
 
-    // 展示
-    function showFixed() {
-        var fixed_title = $(".show_fixed").val();
-        fixed_title += fixArray[fixArray.length - 1] + "\n";
-        $(".show_fixed").val(fixed_title);
-    }
-
     //文字中符合关键词的高亮
     function textHighlight(text, keywords) {
         var len = keywords.length
@@ -279,6 +272,16 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
     // 获取 .后缀名
     function getExtension(name) {
         return name.substring(name.lastIndexOf("."))
+    }
+
+    //修改进度条
+    function changeProgress(current, length) {
+        current = parseFloat(current)
+        length = parseFloat(length)
+        var percent = ((current / length) * 100).toFixed(1)
+        element.progress('mark-progress', percent + '%');
+        $('#progress-percent').text(percent)
+        $('#progress-length').text(length)
     }
 });
 

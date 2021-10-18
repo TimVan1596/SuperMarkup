@@ -88,6 +88,9 @@
     background-color: #fff;
     color: #666;
     box-shadow: 1px 1px 4px #c0c4cc;
+}
+
+.content-width {
     width: 70%;
     margin-left: 15%;
 }
@@ -165,7 +168,7 @@
         padding: 0;
     }
 
-    .text-card {
+    .content-width {
         width: 94%;
         margin-left: 3%;
     }

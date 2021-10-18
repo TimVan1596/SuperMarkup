@@ -52,14 +52,28 @@
 <div class="layui-container">
     <div class="layui-row">
         <!------------- start 导入区 --------------->
-        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-            <div class="input_file">
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="margin-top: 12px">
+            <div class="input_file" style="display: none">
                 <input type="file" name="files" id="files" value="" style="opacity: 0;">
-
                 <ul id="file_list"></ul>
             </div>
             <div>
-                <div class="layui-card text-card">
+                <div class="content-width">
+                    <div style="display: flex;flex-wrap: nowrap;">
+                        <p style="width: 50%;">
+                            完成进度 <span id="progress-percent">0</span>%
+                        </p>
+                        <p style="width:49%;text-align: right;color: #9e9e9e;">
+                            全文共<span id="progress-length">0</span>句段
+                        </p>
+
+                    </div>
+                    <div class="layui-progress " lay-filter="mark-progress">
+                        <div class="layui-progress-bar layui-bg-blue " lay-percent="0%"></div>
+                    </div>
+                </div>
+
+                <div class="layui-card text-card content-width">
                     <div class="layui-card-header" style="">
                         <div id="card-title" style="float: left">
                         </div>
