@@ -1,5 +1,5 @@
 if (!(window.File || window.FileReader || window.FileList || window.Blob)) {
-    alert('你妈喊你换Chrome浏览器啦');
+    alert('你妈喊你换Chrome浏览器啦！');
 }
 
 class Util {
@@ -12,9 +12,9 @@ class Util {
 /** 全局变量
  *  origin_array = 从源文件按照句号分割的全部段落
  *  originLength = 句段总个数
+ *  fileName = 打开的文件名
  * */
 var origin_array = [];
-var fixArray = [];
 var utilTool = new Util();
 var fileName = "";
 var originLength;
@@ -36,42 +36,69 @@ layui.config({
 });
 
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-layui.use(['element', 'layer', 'ClipboardJS'], function () {
+layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
     var element = layui.element;
     var ClipboardJS = layui.ClipboardJS;
+    var dropdown = layui.dropdown;
 
-    var clipboard = new ClipboardJS("#copy-btn");
-    clipboard.on("success", function (e) {
-        layer.msg('已将结果复制到剪切板');
-        e.clearSelection();
-    });
+    function init() {
+        //初始化剪切板
+        var clipboard = new ClipboardJS("#copy-btn");
+        clipboard.on("success", function (e) {
+            layer.msg('已将结果复制到剪切板');
+            e.clearSelection();
+        });
+        //初始化下拉框
+        dropdown.render({
+            elem: '#import-dropdown'
+            , data: [{
+                title: '从文本导入'
+                , id: 'importFromTextBtn'
 
-    //
-    // clipboard.on('error', function (e) {
-    //     document.querySelector('.copy');
-    //     alert("复制失败,请记住下必须付款的金额 不能多不能少否则不能成功");
-    // });
+            }, {
+                title: '复制结果'
+                , id: 'copyResult'
+            }, {
+                title: '下载'
+                , id: 'download'
+            }]
+            , id: 'importDropdown'
+            , click: function (data, othis) {
+                var downId = data.id;
+                // 从文本导入
+                if (downId == 'importFromTextBtn') {
+                    layer.prompt({
+                        formType: 2,
+                        maxlength: 32768,
+                        title: '复制文本到这里',
+                        area: ['480px', '192px'],
+                    }, function (value, index, elem) {
+                        fileName = 'temp.txt'
+                        analysis(value)
+                        layer.close(index);
+                        return value;
+                    });
+                } else if (downId == 'download') {
+                    var showText = $(".show_fixed").val();
+                    if (showText.length > 0) {
+                        saveFile(showText, fileName)
+                    } else {
+                        layer.msg('未选择文本')
+                    }
+                } else if (downId == 'copyResult') {
+                    $('#copy-btn').click();
+                }
+
+            }
+        });
+    }
+
+    //初始化
+    init()
 
     // 初始化
     $(".fix_text").val('');
     $(".show_fixed").val('');
-
-
-    $("#uploadFromTextBtn").click(function () {
-        // 审核备注
-        layer.prompt({
-            formType: 2,
-            maxlength: 32768,
-            title: '直接复制文本到这里',
-            area: ['480px', '192px'],
-        }, function (value, index, elem) {
-            fileName = 'temp.txt'
-            analysis(value)
-            layer.close(index);
-            return value;
-        });
-    });
-
 
     $(".choose_file").click(function (event) {
         $("#files").click();
@@ -101,9 +128,7 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
                 analysis(pointsTxt);
             };
 
-
         })
-
     });
 
     // 下一个
@@ -111,7 +136,6 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         // 读取修改的句子
         var fixText = $(".fix_text").val();
         var originText = $("#origin-text").text();
-        console.log('origin_array')
         if (origin_array.length <= 0) {
             //询问框
             layer.confirm('换下一个吧hxd？', {
@@ -146,23 +170,16 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
 
         //改变进度条
         changeProgress(originLength - origin_array.length, originLength)
-        // 判断是否还有
+        // 判断是否还有句段
         if (origin_array.length > 0) {
-            var firstText = origin_array[0];
-            firstText = textHighlight(firstText, keywords);
-            $("#origin-text").html(firstText);
-
+            showText(origin_array[0])
         } else {
             //询问框
             layer.confirm('换下一个吧hxd？', {
                 btn: ['好的', '再改改'] //按钮
             }, function () {
-                var fixed_text = $(".show_fixed").val();
-                var blob = new Blob([fixed_text], {
-                    type: "text/plain;charset=utf-8"
-                });
-                var newFileName = getFileName(fileName) + '_new' + getExtension(fileName)
-                saveAs(blob, newFileName);
+                var showText = $(".show_fixed").val();
+                saveFile(showText, fileName)
                 location.reload();
             }, function () {
             });
@@ -174,7 +191,7 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         obj.scrollTop = obj.scrollHeight;
     });
 
-    // 解析并显示
+    // 对导入的txt进行解析并显示
     function analysis(text) {
         origin_array = text.split('。');
         for (var i = 0; i < origin_array.length; i++) {
@@ -183,13 +200,17 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         cleanEmpty(origin_array)
         originLength = origin_array.length
         changeProgress(0, originLength)
+        //显示
+        showText(origin_array[0])
+    }
 
-        var firstText = origin_array[0];
-        // firstText = '<span style="color: #0000FF">' + firstText + '</span>';
+    //显示待标注的句段
+    function showText(firstText) {
         firstText = textHighlight(firstText, keywords);
         $("#origin-text").html(firstText);
     }
 
+    // 进行fix选择option
     $(".options-btn").click(function () {
         var origin = $("#origin-text").text();
         if (origin.length > 0) {
@@ -283,8 +304,16 @@ layui.use(['element', 'layer', 'ClipboardJS'], function () {
         $('#progress-percent').text(percent)
         $('#progress-length').text(length)
     }
-});
 
+    //保存文件
+    function saveFile(content, saveFileName) {
+        var blob = new Blob([content], {
+            type: "text/plain;charset=utf-8"
+        });
+        var newFileName = getFileName(saveFileName) + '_new' + getExtension(saveFileName)
+        saveAs(blob, newFileName);
+    }
+});
 
 //清空数组中的空数组元素如[[],{a:1}]
 function cleanEmpty(array) {
