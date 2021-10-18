@@ -56,7 +56,7 @@
 
 
 .next_warp {
-    margin-top:1%;
+    margin-top: 1%;
 
 }
 
@@ -131,14 +131,19 @@
     margin-top: 2%;
 }
 
-/**/
-
+/* 导航栏的按钮 */
 .header-btn {
     display: block;
     padding: 0 20px;
     color: #fff;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* 展示区的文字 */
+.origin-text {
+    height: 180px;
+    overflow: auto;
 }
 
 
