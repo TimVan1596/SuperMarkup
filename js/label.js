@@ -59,6 +59,9 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
                 title: '复制结果'
                 , id: 'copyResult'
             }, {
+                title: '打开提示'
+                , id: 'openHelp'
+            }, {
                 title: '下载'
                 , id: 'download'
             }]
@@ -87,19 +90,28 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
                     }
                 } else if (downId == 'copyResult') {
                     $('#copy-btn').click();
+                } else if (downId == 'openHelp') {
+                    var $inputZeroElem = $('#input-zero')
+                    if ($inputZeroElem.hasClass('content-width')) {
+                        openHelp();
+                    } else {
+                        closeHelp()
+                    }
                 }
 
             }
         });
+
+        // 初始化
+        $(".fix_text").val('');
+        $(".show_fixed").val('');
     }
 
     //初始化
     init()
 
-    // 初始化
-    $(".fix_text").val('');
-    $(".show_fixed").val('');
 
+    //点击选择文件按钮
     $(".choose_file").click(function (event) {
         $("#files").click();
         $("#files").change(function () {
@@ -131,14 +143,14 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
         })
     });
 
-    // 下一个
+    //点击下一个按钮
     $("#next-btn").click(function () {
         // 读取修改的句子
         var fixText = $(".fix_text").val();
         var originText = $("#origin-text").text();
         if (origin_array.length <= 0) {
             //询问框
-            layer.confirm('换下一个吧hxd？', {
+            layer.confirm('结束啦！换下一个吧hxd？', {
                 btn: ['好的', '再改改'] //按钮
             }, function () {
                 var fixed_text = $(".show_fixed").val();
@@ -191,6 +203,56 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
         obj.scrollTop = obj.scrollHeight;
     });
 
+    // 进行fix选择option
+    $(".options-btn").click(function () {
+        var origin = $("#origin-text").text();
+        if (origin.length > 0) {
+            fixOriginText(origin, $(this.name))
+        } else {
+            layer.msg('未选择文本')
+        }
+
+    });
+
+    //打开提示文件（新页面）
+    $('#header-help').click(function () {
+        layer.open({
+            type: 2,
+            title: '军事装备数据标识要点',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['90%', '65%'],
+            content: 'help.html'
+        });
+    })
+
+    $('#help-btn').click(function () {
+        var $inputZeroElem = $('#input-zero')
+        if ($inputZeroElem.hasClass('content-width')) {
+            openHelp();
+        } else {
+            closeHelp()
+        }
+
+    });
+
+    //当前页打开帮助
+    function openHelp() {
+        var $inputZeroElem = $('#input-zero')
+        $inputZeroElem.removeClass('content-width')
+        $inputZeroElem.addClass('layui-col-xs7 layui-col-sm8 layui-col-md8')
+        $('#help-zero').removeClass('hide')
+    }
+
+    //当前页关闭帮助
+    function closeHelp() {
+        var $inputZeroElem = $('#input-zero')
+        $inputZeroElem.addClass('content-width')
+        $inputZeroElem.removeClass('layui-col-xs7 layui-col-sm8 layui-col-md8')
+        $('#help-zero').addClass('hide')
+    }
+
+
     // 对导入的txt进行解析并显示
     function analysis(text) {
         origin_array = text.split('。');
@@ -209,17 +271,6 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
         firstText = textHighlight(firstText, keywords);
         $("#origin-text").html(firstText);
     }
-
-    // 进行fix选择option
-    $(".options-btn").click(function () {
-        var origin = $("#origin-text").text();
-        if (origin.length > 0) {
-            fixOriginText(origin, $(this.name))
-        } else {
-            layer.msg('未选择文本')
-        }
-
-    });
 
     // 修改
     function fixOriginText(origin, option_title) {
@@ -272,18 +323,6 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
         }
         return text;
     }
-
-    //打开提示文件
-    $('#header-help').click(function () {
-        layer.open({
-            type: 2,
-            title: '军事装备数据标识要点',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['90%', '65%'],
-            content: 'help.html'
-        });
-    })
 
     // 获取文件名
     function getFileName(name) {

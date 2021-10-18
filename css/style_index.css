@@ -84,9 +84,16 @@
     box-shadow: 1px 1px 4px #c0c4cc;
 }
 
+/* 导入区的宽度 */
 .content-width {
     width: 70%;
     margin-left: 15%;
+}
+
+/* 加上提示区后的导入区的宽度 */
+.content-help-width {
+    width: 70%;
+    margin-left: 0;
 }
 
 /* 卡片中文本的样式*/
@@ -123,11 +130,6 @@
     margin-bottom: 8%;
 }
 
-/* 操作区 */
-.operate-zero {
-    margin-top: 2%;
-}
-
 /* 导航栏的按钮 */
 .header-btn {
     display: block;
@@ -143,6 +145,52 @@
     overflow: auto;
 }
 
+/* 提示区*/
+.help-zero {
+    padding: 25.2px 0 25.2px 0.8em;
+}
+
+
+/* 提示区的文字*/
+.help-zero-text {
+    height: 228px;
+    overflow: auto;
+    border-color: #eee;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px #c0c4cc;
+    color: #666;
+}
+
+.help-zero-text-pad {
+    line-height: 1.6;
+    padding: 12px;
+}
+
+.my-card-header {
+    padding: 0 0 0 15px;
+}
+
+.circle-style {
+    width: 1.08em;
+    height: 2.76em;
+    position: absolute;
+    z-index: 9999;
+    cursor: pointer;
+    opacity: 0.12;
+}
+
+.circle-style:hover {
+    opacity: 0.36;
+}
+
+.right-circle-style {
+    right: 0;
+    bottom: 39%;
+}
+
 
 /*** 自适应部分 ***/
 /* 移动设备 */
@@ -156,10 +204,14 @@
     }
 
     .options-btn {
-        margin-bottom: 35%;
+        margin-bottom: 30%;
         width: 85%;
         text-align: center;
         padding: 0;
+    }
+
+    .next_warp {
+        margin-top: -0.5%;
     }
 
     .content-width {
@@ -168,7 +220,7 @@
     }
 
     .operate-zero {
-        margin-top: 8%;
+        margin-top: 0;
     }
 
     .fix_text {
@@ -178,6 +230,18 @@
     .show_fixed {
         font-size: 1.0em;
     }
+
+    /* 提示区的文字间距*/
+    .help-zero-text-pad {
+        padding: 6px;
+        line-height: 1.2;
+        font-size: small;
+    }
+
+    .choose-file-btn-text {
+        display: none;
+    }
+
 }
 
 @media screen and (min-width: 641px) {
@@ -185,6 +249,13 @@
         width: 65%;
         font-size: larger;
     }
+
+
 }
 
-/* 头部 */
+/* 箭头组合*/
+.left-circle {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,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");
+}

@@ -44,8 +44,8 @@
                 <input type="file" name="files" id="files" value="" style="opacity: 0;">
                 <ul id="file_list"></ul>
             </div>
-            <div>
-                <div class="content-width">
+            <div id="input-zero" class="content-width">
+                <div>
                     <div style="display: flex;flex-wrap: nowrap;">
                         <p style="width: 50%;">
                             完成进度 <span id="progress-percent">0</span>%
@@ -58,34 +58,56 @@
                         <div class="layui-progress-bar layui-bg-blue " lay-percent="0%"></div>
                     </div>
                 </div>
+                <div style="position: relative">
+                    <div class="layui-card text-card">
+                        <div class="my-card-header layui-card-header">
+                            <div id="card-title" style="float: left">
+                            </div>
+                            <div class="layui-btn-container btn-container" style="float: right">
+                                <button class="choose_file layui-btn layui-btn-sm layui-btn-radius layui-btn-normal"><i
+                                        class="layui-icon layui-icon-upload-drag"></i>
+                                    <span class="choose-file-btn-text">来吧选文件吧</span>
+                                </button>
 
-                <div class="layui-card text-card content-width">
-                    <div class="layui-card-header" style="">
-                        <div id="card-title" style="float: left">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary"
+                                        id="import-dropdown">
+                                    <i class="layui-icon layui-icon-down layui-font-12"></i>
+                                </button>
+                                <button id="copy-btn" data-clipboard-target="#show-fixed-ta"
+                                        style="display: none"></button>
+
+                            </div>
                         </div>
-                        <div class="layui-btn-container btn-container" style="float: right">
-                            <button class="choose_file layui-btn layui-btn-sm layui-btn-radius layui-btn-normal"><i
-                                    class="layui-icon layui-icon-upload-drag"></i>
-                                来吧选文件吧
-                            </button>
 
-                            <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary"
-                                    id="import-dropdown">
-                                <i class="layui-icon layui-icon-down layui-font-12"></i>
-                            </button>
-                            <button id="copy-btn" data-clipboard-target="#show-fixed-ta" style="display: none"></button>
-
+                        <div class="layui-card-body">
+                            <div id="origin-text" class="origin-text"></div>
                         </div>
                     </div>
-
-                    <div class="layui-card-body">
-                        <div id="origin-text" class="origin-text">
-
+                    <div>
+                        <div id="help-btn"
+                             class="left-circle circle-style right-circle-style">
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <div id="help-zero" class="hide layui-col-xs5 layui-col-sm4 layui-col-md4 help-zero ">
+                <div style="position: relative">
+                    <div class="layui-panel help-zero-text">
+                        <div class="help-zero-text-pad">
+                            <div>1. 实例（xxx战斗机，是一款xxx战斗机）<br>
+                                3. 操作员（通常为部队，例如x国空军/海军/驻xx部队）<br>
+                                5. 发生国（指哪些国家在使用该装备，如x国采购xx架，订购xx）<br>
+                                6. 战争（在xx战场上，xx战争中，参与过xx冲突）<br>
+                                7. 武器（搭载有xx;xx;xx，可以发射xx;xx;xx，）<br>
+                                9. 设计者（由x国xx公司研制）<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
         </div>
         <!------------- end 导入区 --------------->

@@ -20,6 +20,10 @@
     color: white;
 }
 
+.hide {
+    display: none;
+}
+
 
 /*** 自适应部分 ***/
 /* 移动设备 */
