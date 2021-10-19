@@ -23,7 +23,8 @@ var keywords = ['是一款', '开发', '设计', '使用国家', '使用国', '�
     , '国陆军', '生产国家', '生产国', '拥有国家', '拥有国', '开发公司', '研发公司', '产地', '制造国'
     , '采购', '第二次世界大战', '二战', '搭载', '战场上', '战争中', '参与过', '可以发射', '设计'
     , '是一款', '是一个', '一战', '第一次世界大战', '改进', '装备', '是一', '使用', '产地'
-    , '战场上', '战争中', '参与过', '战役', '属于', '服役', '配属']
+    , '战场上', '战争中', '参与过', '战役', '属于', '服役', '配属', '装备', '配备', '装有', '装配'
+    , '采购']
 var regexs = [/(是|属于|服役)([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*(舰|艇|机|船)/g, /驻([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*(部队|军队|海军|陆军|空军)/g, /采购([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*(架|台|量)/g
     , /由([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*(研制|研发|设计|装备)/g, /(是|属于|服役)([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*的/g, /在([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_])*(战场|战争|大战|战|战役)/g];
 keywords = regexs.concat(keywords)
@@ -187,7 +188,7 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
             showText(origin_array[0])
         } else {
             //询问框
-            layer.confirm('换下一个吧hxd？', {
+            layer.confirm('结束啦！换下一个吧hxd？', {
                 btn: ['好的', '再改改'] //按钮
             }, function () {
                 var showText = $(".show_fixed").val();
@@ -255,7 +256,7 @@ layui.use(['element', 'layer', 'ClipboardJS', 'dropdown'], function () {
 
     // 对导入的txt进行解析并显示
     function analysis(text) {
-        origin_array = text.split('。');
+        origin_array = text.split(/[。；;?？]/);
         for (var i = 0; i < origin_array.length; i++) {
             origin_array[i] = utilTool.clearString(origin_array[i]);
         }
